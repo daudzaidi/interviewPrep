@@ -70,15 +70,16 @@ void stockSpanUsingStackGog(int arr[], int len){
 	res.push_back(1);
 	int temp;
 	for(int i=1;i<len;i++){
-		temp =1;
-		if(!S.empty()){
-			while(arr[S.top()] < arr[i] && !S.empty()){
-				S.pop();
-			}
-			temp = i - S.top();
-			res.push_back(temp);
-		}
 
+		while(!S.empty() && arr[S.top()] < arr[i]){
+			S.pop();	
+		}
+		if(S.empty()){
+			temp = i+1;
+		}else{
+			temp = i - S.top();
+		}
+		res.push_back(temp);
 		S.push(i);
 	}
 		for(int i=0;i<res.size();i++)
@@ -87,7 +88,7 @@ void stockSpanUsingStackGog(int arr[], int len){
 }
 
 int main(){
-	int arr[] = {10, 4, 5, 90, 120, 80};
+	int arr[] = {100, 80, 60, 70, 60, 75, 85};
 	int len = sizeof(arr)/sizeof(arr[0]);
 	//stockSpanNaiveMethod(arr, len);
 
