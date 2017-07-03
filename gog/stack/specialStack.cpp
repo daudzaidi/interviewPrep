@@ -61,6 +61,9 @@ public:
 	
 };
 
+/*
+	Without Space Optimization
+
 void specialStack :: push(int x){
 	if(isEmpty()){
 		Stack :: push(x);
@@ -85,6 +88,38 @@ int specialStack :: pop(){
 	return res;
 }
 
+*/
+
+/* With Space Optimization */
+
+
+void specialStack :: push(int x){
+	if(isEmpty()){
+		Stack :: push(x);
+		min.push(x);
+	}else{
+
+		Stack :: push(x);
+		int y = min.pop();
+		min.push(y);
+		if(x <= y){
+			min.push(x);
+		}
+
+	}
+}
+
+
+int specialStack :: pop(){
+	int res = Stack :: pop();
+	int y = min.pop();
+	//cout << res << endl;
+	if(y != res)
+		min.push(y);
+	
+	return res;
+}
+
 int specialStack :: getMin(){
 	int res =  min.pop();
 	min.push(res);
@@ -95,12 +130,12 @@ int main(){
 
 	specialStack S;
 	S.push(11);
-	S.push(2);
-	S.push(3);
-	S.push(10);
+	S.push(23);
+	S.push(30);
+	S.push(100);
 	cout << S.pop()<<endl;
 	cout << S.pop()<<endl;
-	cout << S.pop()<<endl;
+	//cout << S.pop()<<endl;
 	cout << S.getMin()<<endl;
 
 }
