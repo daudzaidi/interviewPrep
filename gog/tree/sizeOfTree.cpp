@@ -48,6 +48,23 @@ void delete_tree(node **root){
 	*root = NULL;
 }
 
+node* swap(node* root){
+	node* temp ;
+	temp = root->right;
+	root->right =root->left;
+	root->left = temp;
+	return root;
+}
+
+void makeMirror(node *root){
+	if(root == NULL) return;
+
+
+	 makeMirror(root->left);
+	 makeMirror(root->right);
+	 swap(root);
+}
+
 int main(){
 	node *root = createNode(1);
 	root->left = createNode(2);
@@ -55,12 +72,16 @@ int main(){
 	root->left->left = createNode(4);
 	//root->left->left->left = createNode(4);
 	PreOrder(root);
-	cout<< endl;
-	cout << size(root);
-	cout<< endl;
-	cout << height(root);
-	delete_tree(&root);
+	// cout<< endl;
+	// cout << size(root);
+	// cout<< endl;
+	// cout << height(root);
+	//delete_tree(&root);
 	//root = NULL;
 	cout << endl;
+	//PreOrder(root);
+	makeMirror(root);
 	PreOrder(root);
+	cout <<root->right->data;
+	cout <<root->right->left->data;
 }
