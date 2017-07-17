@@ -35,6 +35,19 @@ int height(node *root){
 
 }
 
+void deleteTree(node * root){
+	if(root == NULL) return ;
+	deleteTree(root->left);
+	deleteTree(root->right);
+	delete root;
+}
+
+void delete_tree(node **root){
+	//if(*root == NULL) return; No need as null is already been checked above
+	deleteTree(*root);
+	*root = NULL;
+}
+
 int main(){
 	node *root = createNode(1);
 	root->left = createNode(2);
@@ -46,4 +59,8 @@ int main(){
 	cout << size(root);
 	cout<< endl;
 	cout << height(root);
+	delete_tree(&root);
+	//root = NULL;
+	cout << endl;
+	PreOrder(root);
 }
