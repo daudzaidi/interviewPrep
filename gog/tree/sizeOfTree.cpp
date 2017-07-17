@@ -28,13 +28,22 @@ int size(node *root){
 	return size(root->left) + size(root->right)+1;
 }
 
+int height(node *root){
+	if(root == NULL) return 0;
+
+	return max(height(root->left), height(root->right))+ 1;
+
+}
+
 int main(){
 	node *root = createNode(1);
 	root->left = createNode(2);
 	root->right = createNode(3);
 	root->left->left = createNode(4);
-	root->left->left->left = createNode(4);
+	//root->left->left->left = createNode(4);
 	PreOrder(root);
 	cout<< endl;
 	cout << size(root);
+	cout<< endl;
+	cout << height(root);
 }
