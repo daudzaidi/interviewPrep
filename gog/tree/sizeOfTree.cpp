@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 
@@ -65,6 +66,33 @@ void makeMirror(node *root){
 	 swap(root);
 }
 
+
+
+
+void printRootToleafPath(node *root, int path[], int pathlen){
+	if(root == NULL) return;
+
+
+
+	path[pathlen] = root->data;
+	pathlen++;
+	if(root->left == NULL & root->right == NULL){
+			for(int i=0;i<pathlen;i++)
+		cout << path[i] << " ";		
+}else{
+		printRootToleafPath(root->left, path, pathlen);
+
+	
+
+	printRootToleafPath(root->right, path, pathlen);
+}
+
+
+
+
+
+}	
+
 int main(){
 	node *root = createNode(1);
 	root->left = createNode(2);
@@ -80,8 +108,11 @@ int main(){
 	//root = NULL;
 	cout << endl;
 	//PreOrder(root);
-	makeMirror(root);
-	PreOrder(root);
-	cout <<root->right->data;
-	cout <<root->right->left->data;
+	//makeMirror(root);
+	//PreOrder(root);
+	//cout <<root->right->data;
+	//cout <<root->right->left->data;
+		int pathlen = 0;
+	int path[10000] ;
+	printRootToleafPath(root, path, pathlen);
 }
